@@ -6,9 +6,17 @@
     xmlns:local="clr-namespace:MauiAzureB2C"
     Title="MauiAzureB2C">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <ShellContent>
+        <ContentPage>
+            <VerticalStackLayout
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Spacing="16">
+
+                <ActivityIndicator IsRunning="True" />
+                <Label Text="Signing you in..." />
+            </VerticalStackLayout>
+        </ContentPage>
+    </ShellContent>
 
 </Shell>

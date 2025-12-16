@@ -26,6 +26,8 @@ public partial class AppShell : Shell
             var authService = new AuthenticationService();
             await authService.AcquireTokenAsync();
 
+            LoadAuthenticatedShell();
+
             // Auth succeeded
             // At this point you would typically navigate:
             // await GoToAsync("//home");
@@ -34,6 +36,27 @@ public partial class AppShell : Shell
         {
             System.Diagnostics.Debug.WriteLine(
                 $"Authentication failed: {ex}");
+            await DisplayAlertAsync(
+                "Authentication failed",
+                ex.Message,
+                "Close");
+            Application.Current?.Quit();
         }
+    }
+
+    private void LoadAuthenticatedShell()
+    {
+        // Remove loading content
+        Items.Clear();
+
+        // Register routes
+        Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
+
+        // Build authenticated shell UI
+        Items.Add(new ShellContent
+        {
+            Title = "Home",
+            ContentTemplate = new DataTemplate(typeof(MainPage))
+        });
     }
 }
