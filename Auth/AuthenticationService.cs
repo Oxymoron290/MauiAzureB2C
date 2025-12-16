@@ -29,7 +29,6 @@ public sealed class AuthenticationService
 #if WINDOWS
             return await _pca
                 .AcquireTokenInteractive(AuthConfig.Scopes)
-                .WithUseEmbeddedWebView(true)
                 .WithParentActivityOrWindow(
                     PlatformConfig.ParentWindowHandle)
                 .ExecuteAsync();
